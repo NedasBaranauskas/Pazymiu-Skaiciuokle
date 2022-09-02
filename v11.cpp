@@ -1,12 +1,8 @@
 #include "v11.hpp"
 
-// Studentas::Studentas(std::istream& is) { 
-//   readStudent(is);  
-// }
-
-//double Studentas::galBalas(double (*) (vector<double>) = mediana) const {
-    
-//}
+studentas::studentas(std::istream& is) { 
+  readStudent(is);  
+}
 
 struct stud{
     string vardas;
@@ -91,7 +87,7 @@ void ivestis(vector<stud>& studentas){
                 if (ats=='T'||ats=='t'){
                     cout<<"Atsitiktinai sugeneruoti pazymiai :"<<endl;
                     for (int j=0; j<ndsk; j++){
-                        v=rand()%10;
+                        v=rand()%11;
                         studentas[i].nd.push_back(v);
                         cout<<v<<endl;
                     }
@@ -107,7 +103,7 @@ void ivestis(vector<stud>& studentas){
                 klausimas (ats, "Ar norite, kad butu atsitiktinai sugeneruoti pazymiai? (T/N)");
                 if (ats=='T'||ats=='t'){
                     while (ats=='T'||ats=='t'){
-                        v=rand()%10;
+                        v=rand()%11;
                         studentas[i].nd.push_back(v);
                         cout<<"Sugeneruotas pazymys : "<<v<<endl;
                         klausimas(ats, "Ar norite sugeneruoti dar viena pazymi? (T/N)");
@@ -126,7 +122,7 @@ void ivestis(vector<stud>& studentas){
                 sivestis("Iveskite studento egzamino rezultata : ");
             }
             if (ats=='N'||ats=='n'){
-                studentas[i].egz=rand()%10;
+                studentas[i].egz=rand()%11;
                 cout<<"Studento egzamino rezultato atsitiktinai sugeneruotas pazymys : "<<studentas[i].egz<<endl;
             }
         }
@@ -144,7 +140,7 @@ void ivestis(vector<stud>& studentas){
                 if (ats=='T'||ats=='t'){
                     cout<<"Atsitiktinai sugeneruoti pazymiai :"<<endl;
                     for (int j=0; j<studentas[studentas.size()].nd.size(); j++){
-                        v=rand()%10;
+                        v=rand()%11;
                         studentas[studentas.size()].nd.push_back(v);
                         cout<<v<<endl;
                     }
@@ -159,7 +155,7 @@ void ivestis(vector<stud>& studentas){
                 klausimas (ats, "Ar norite, kad butu atsitiktinai sugeneruoti pazymiai? (T/N)");
                 if (ats=='T'||ats=='t'){
                     while (ats=='T'||ats=='t'){
-                        v=rand()%10;
+                        v=rand()%11;
                         studentas[studentas.size()].nd.push_back(v);
                         cout<<"Sugeneruotas pazymys : "<<studentas[studentas.size()].nd[studentas[studentas.size()].nd.size()]<<endl;
                         klausimas(ats, "Ar norite sugeneruoti dar viena pazymi? (T/N)");
@@ -178,7 +174,7 @@ void ivestis(vector<stud>& studentas){
                 studentas[studentas.size()].egz=(sivestis("Iveskite studento egzamino rezultata : "));
             }
             if (ats=='N'||ats=='n'){
-                studentas[studentas.size()].egz=(rand()%10);
+                studentas[studentas.size()].egz=(rand()%11);
                 cout<<"Studento egzamino rezultato atsitiktinai sugeneruotas pazymys : "<<studentas[studentas.size()].egz<<endl;
             }
             stud st;
@@ -250,21 +246,39 @@ void isvedimas(vector<stud>& studentas){
     if (iats=='N'||iats=='n'){
         cout<<left<<setw(25)<<"Studento vardas"<<setw(20)<<"Pavarde"<<setw(15)<<"Mediana"<<setw(15)<<"Galutinis"<<endl;
             for (int i=0; i<studentas.size(); i++){
-            cout<<left<<setw(15)<<studentas[i].vardas<<setw(20)<<studentas[i].pavarde<<setw(15)<<setprecision(5)<<mediana(studentas, i)<<setw(15)<<setprecision(5)<<(vidurkis(studentas, i)*0.4+((studentas[i].egz)*0.6))<<endl;
+            cout<<left<<setw(15)<<studentas[i].vardas<<setw(20)<<studentas[i].pavarde<<setw(15)<<setprecision(5)<<mediana(studentas, i)<<setw(15)<<setprecision(5)<<((vidurkis(studentas, i)*0.4)+((studentas[i].egz)*0.6))<<endl;
             }
         }
+}
+
+void rasymas(vector<stud>& studentas, string &ifailas){
+    ofstream f;
+    f.open(ifailas);
+    if(f.fail()){
+        cout<<"Ivyko klaida"<<endl;
+        exit(1);
+    }
+    f<<left<<setw(20)<<"Studento vardas"<<setw(20)<<"Pavarde"<<setw(15)<<"Vidurkis"<<setw(10)<<"Mediana"<<"Galutinis"<<endl;
+    for (int i=0; i<studentas.size(); i++){
+        f<<left<<setw(20)<<studentas[i].vardas<<setw(20)<<studentas[i].pavarde<<setw(15)<<setprecision(5)<<vidurkis(studentas, i)<<setw(10)<<setprecision(5)<<mediana(studentas, i)<<setprecision(5)<<((vidurkis(studentas, i)*0.4)+((studentas[i].egz)*0.6))<<endl;
+    }
+    f.close();
 }
 
 int main(){
     char n;
     vector<stud> studentas;
-    string failas="duom.txt";
+    string failas="duom2.txt";
+    string ifailas="rez2.txt";
     klausimas(n, "Ar nuskaityti duomenis is failo? (T/N)");
     if (n=='T'||n=='t')
     skaitymas(studentas, failas);
     if (n=='N'||n=='n')
     ivestis(studentas);
+    klausimas(n, "Ar isvesti duomenis i faila? (T/N)");
+    if (n=='T'||n=='t')
+    rasymas(studentas, ifailas);
+    if (n=='N'||n=='n')
     isvedimas(studentas);
-
     return 0;
 }
