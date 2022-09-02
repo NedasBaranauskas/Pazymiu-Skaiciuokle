@@ -143,7 +143,7 @@ void ivestis(stud* &studentas, int &studsk){
                 if (ats3=='T'||ats3=='t'){
                     cout<<"Atsitiktinai sugeneruoti pazymiai :"<<endl;
                     for (int j=0; j<studentas[i].ndsk; j++){
-                        studentas[i].nd[j]=(rand()%10);
+                        studentas[i].nd[j]=(rand()%11);
                         cout<<studentas[i].nd[j]<<endl;
                     }
                 }
@@ -160,8 +160,8 @@ void ivestis(stud* &studentas, int &studsk){
                 klausimas (ats3, "Ar norite, kad butu atsitiktinai sugeneruoti pazymiai? (T/N)");
                 if (ats3=='T'||ats3=='t'){
                     while (ats4=='T'||ats4=='t'){
-                        studentas[i].nd[t]=(rand()%10);
-                        pazpridejimas(studentas->nd, t, (rand()%10));
+                        studentas[i].nd[t]=(rand()%11);
+                        pazpridejimas(studentas->nd, t, (rand()%11));
                         cout<<"Sugeneruotas pazymys : "<<studentas[i].nd[t]<<endl;
                         klausimas(ats4, "Ar norite sugeneruoti dar viena pazymi? (T/N)");
                         t++;
@@ -182,7 +182,7 @@ void ivestis(stud* &studentas, int &studsk){
                 sivestis(studentas[i].egz,"Iveskite studento egzamino rezultata : ");
             }
             if (ats5=='N'||ats5=='n'){
-                studentas[i].egz=(rand()%10);
+                studentas[i].egz=(rand()%11);
                 cout<<"Studento egzamino rezultato atsitiktinai sugeneruotas pazymys : "<<studentas[i].egz<<endl;
             }
         }
@@ -201,7 +201,7 @@ void ivestis(stud* &studentas, int &studsk){
                 klausimas (ats3, "Ar norite, kad butu atsitiktinai sugeneruoti pazymiai? (T/N)");
                 if (ats3=='T'||ats3=='t'){
                     for (int j=0; j<studentas[l].ndsk; j++){
-                        studentas[l].nd[j]=(rand()%10);
+                        studentas[l].nd[j]=(rand()%11);
                     }
                     cout<<"Atsitiktinai sugeneruoti pazymiai :"<<endl;
                     for (int j=0; j<studentas[l].ndsk; j++){
@@ -220,7 +220,7 @@ void ivestis(stud* &studentas, int &studsk){
                 klausimas (ats3, "Ar norite, kad butu atsitiktinai sugeneruoti pazymiai? (T/N)");
                 if (ats3=='T'||ats3=='t'){
                     while (ats4=='T'||ats4=='t'){
-                        studentas[l].nd[t]=(rand()%10);
+                        studentas[l].nd[t]=(rand()%11);
                         pazpridejimas(studentas->nd, t, studentas[l].nd[t]);
                         cout<<"Sugeneruotas pazymys : "<<studentas[l].nd[t]<<endl;
                         klausimas(ats4, "Ar norite sugeneruoti dar viena pazymi? (T/N)");
@@ -242,7 +242,7 @@ void ivestis(stud* &studentas, int &studsk){
                 sivestis(studentas[l].egz,"Iveskite studento egzamino rezultata : ");
             }
             if (ats5=='N'||ats5=='n'){
-                studentas[l].egz=(rand()%10);
+                studentas[l].egz=(rand()%11);
                 cout<<"Studento egzamino rezultato atsitiktinai sugeneruotas pazymys : "<<studentas[l].egz<<endl;
             }
             l++;
